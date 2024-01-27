@@ -51,8 +51,8 @@
         "FirstKillCount": 1,
         "SurvivorsA": null,
         "SurvivorsB": [
-          "shooterxdd",
-          "HZI"
+          "HZI",
+          "shooterxdd"
         ],
         "BombPlanted": true,
         "SideWon": "Terrorists",
@@ -602,8 +602,8 @@
         "ScoreB": 2,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "TTyke",
           "0SAMAS",
+          "TTyke",
           "pokemoncs2"
         ],
         "SurvivorsB": null,
@@ -737,9 +737,9 @@
         "ScoreB": 2,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "ejramzz",
+          "TTyke",
           "0SAMAS",
-          "TTyke"
+          "ejramzz"
         ],
         "SurvivorsB": null,
         "BombPlanted": false,
@@ -1037,10 +1037,10 @@
         "ScoreB": 2,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "TTyke",
-          "ejramzz",
           "0SAMAS",
-          "pokemoncs2"
+          "TTyke",
+          "pokemoncs2",
+          "ejramzz"
         ],
         "SurvivorsB": null,
         "BombPlanted": false,
@@ -1792,10 +1792,10 @@
         "ScoreB": 2,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "pokemoncs2",
+          "ejramzz",
           "0SAMAS",
           "TTyke",
-          "ejramzz"
+          "pokemoncs2"
         ],
         "SurvivorsB": null,
         "BombPlanted": false,
@@ -2429,10 +2429,10 @@
         "ScoreB": 7,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "pokemoncs2",
-          "TTyke",
           "ejramzz",
-          "0SAMAS"
+          "0SAMAS",
+          "TTyke",
+          "pokemoncs2"
         ],
         "SurvivorsB": null,
         "BombPlanted": false,
@@ -2534,9 +2534,9 @@
         "FirstKillCount": 1,
         "SurvivorsA": null,
         "SurvivorsB": [
+          "ejramzz",
           "0SAMAS",
-          "TTyke",
-          "ejramzz"
+          "TTyke"
         ],
         "BombPlanted": true,
         "SideWon": "Terrorists",
@@ -2653,9 +2653,9 @@
         "FirstKillCount": 1,
         "SurvivorsA": null,
         "SurvivorsB": [
-          "TTyke",
           "ejramzz",
           "0SAMAS",
+          "TTyke",
           "pokemoncs2"
         ],
         "BombPlanted": true,
@@ -3040,9 +3040,9 @@
         "FirstKillCount": 1,
         "SurvivorsA": null,
         "SurvivorsB": [
-          "ejramzz",
+          "TTyke",
           "pokemoncs2",
-          "TTyke"
+          "ejramzz"
         ],
         "BombPlanted": true,
         "SideWon": "Terrorists",
@@ -3279,10 +3279,10 @@
         "FirstKillCount": 1,
         "SurvivorsA": null,
         "SurvivorsB": [
-          "pokemoncs2",
+          "ejramzz",
           "0SAMAS",
           "TTyke",
-          "ejramzz"
+          "pokemoncs2"
         ],
         "BombPlanted": true,
         "SideWon": "Terrorists",
@@ -3557,8 +3557,10 @@
         "Round4k": 0,
         "Round5k": 0,
         "Totaldmg": 1742,
-        "TradeKills": 0,
+        "TradeKills": 1,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 16,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3570,8 +3572,6 @@
           "407": 4,
           "7": 1
         },
-        "TKills": 16,
-        "CTKills": 5,
         "AvgDist": 0,
         "TotalDist": 0,
         "FlashesThrown": 28,
@@ -3601,8 +3601,10 @@
         "Round4k": 0,
         "Round5k": 0,
         "Totaldmg": 843,
-        "TradeKills": 0,
+        "TradeKills": 2,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 5,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3610,8 +3612,6 @@
           "407": 4,
           "9": 2
         },
-        "TKills": 3,
-        "CTKills": 10,
         "AvgDist": 0,
         "TotalDist": 0,
         "FlashesThrown": 14,
@@ -3641,8 +3641,10 @@
         "Round4k": 1,
         "Round5k": 0,
         "Totaldmg": 1573,
-        "TradeKills": 0,
+        "TradeKills": 1,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 20,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3653,8 +3655,6 @@
           "407": 4,
           "9": 1
         },
-        "TKills": 5,
-        "CTKills": 20,
         "AvgDist": 0,
         "TotalDist": 0,
         "FlashesThrown": 38,
@@ -3686,6 +3686,8 @@
         "Totaldmg": 990,
         "TradeKills": 0,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 4,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3695,8 +3697,6 @@
           "4": 1,
           "407": 4
         },
-        "TKills": 8,
-        "CTKills": 2,
         "AvgDist": 0,
         "TotalDist": 0,
         "FlashesThrown": 10,
@@ -3726,8 +3726,10 @@
         "Round4k": 0,
         "Round5k": 0,
         "Totaldmg": 1038,
-        "TradeKills": 0,
+        "TradeKills": 1,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 11,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3738,8 +3740,6 @@
           "506": 1,
           "9": 2
         },
-        "TKills": 3,
-        "CTKills": 10,
         "AvgDist": 0,
         "TotalDist": 0,
         "FlashesThrown": 28,
@@ -3771,6 +3771,8 @@
         "Totaldmg": 2026,
         "TradeKills": 0,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 11,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3779,8 +3781,6 @@
           "4": 1,
           "407": 4
         },
-        "TKills": 9,
-        "CTKills": 17,
         "AvgDist": 0,
         "TotalDist": 0,
         "FlashesThrown": 34,
@@ -3810,8 +3810,10 @@
         "Round4k": 1,
         "Round5k": 0,
         "Totaldmg": 2065,
-        "TradeKills": 0,
+        "TradeKills": 4,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 9,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3823,8 +3825,6 @@
           "407": 4,
           "9": 2
         },
-        "TKills": 9,
-        "CTKills": 17,
         "AvgDist": 0,
         "TotalDist": 0,
         "FlashesThrown": 22,

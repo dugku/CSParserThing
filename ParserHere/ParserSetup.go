@@ -78,7 +78,7 @@ type RoundKill struct {
 	IsFlashed        bool
 	Dist             float64
 	KillerWeapon     common.EquipmentType
-	KillerTeam       int
+	KillerTeam       common.Team
 }
 
 type playerStat struct {
@@ -102,6 +102,8 @@ type playerStat struct {
 	Totaldmg         int
 	TradeKills       int
 	TradeDeath       int
+	CTKills          int
+	TKills           int
 	EffectiveFlashes int
 	AvgflshDuration  float64
 	WeaponKill       map[int]int
@@ -165,7 +167,7 @@ func (p *DemoParser) startParsing(demoPath string) error {
 }
 
 func main() {
-	demoDir := "C:\\Users\\iphon\\Desktop\\DEMOProject\\More_Demos"
+	demoDir := "C:\\Users\\Mic\\Desktop\\Demos"
 
 	demoPaths, err := getDemoPaths(demoDir)
 	if err != nil {

@@ -72,6 +72,8 @@ func (p *DemoParser) ThePlayer(player *common.Player) playerStat {
 		Totaldmg:        0,
 		TradeKills:      0,
 		TradeDeath:      0,
+		CTKills:         0,
+		TKills:          0,
 		AvgflshDuration: 0,
 		WeaponKill:      p.allweapons(),
 		NadeThrowen:     make(map[int]int),
@@ -229,7 +231,7 @@ func (p *DemoParser) KillHandler(e events.Kill) {
 				//yikes
 				//Dist:         math.Round(DistForm(e.Killer.Position(), e.Victim.Position())*100) / 100,
 				KillerWeapon: e.Killer.ActiveWeapon().Type,
-				KillerTeam:   int(e.Killer.Team),
+				KillerTeam:   e.Killer.Team,
 			}
 			count++
 		}

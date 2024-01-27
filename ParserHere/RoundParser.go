@@ -38,6 +38,7 @@ func (p *DemoParser) MatchStartHandler(e events.MatchStart) {
 	p.Match.WhoVsWho = CountTeam + " vs " + TerrTeam
 
 	p.Match.Map = p.parser.Header().MapName
+	fmt.Println(p.parser.Header().MapName)
 
 	roundTime.roundStartTime = p.parser.CurrentTime()
 }
@@ -149,8 +150,23 @@ func (p *DemoParser) PlayerAlive(e events.RoundEnd) {
 	if p.state.round > 0 && p.state.round <= len(p.Match.Rounds) {
 		roundInfo := &p.Match.Rounds[p.state.round-1]
 
-		for _, a := range roundInfo.KillARound {
-			fmt.Println(a)
+		//man I hope this logic is right
+		for key, _ := range roundInfo.KillARound {
+
+			if key+1 < len(roundInfo.KillARound) {
+				nextValue := roundInfo.KillARound[key+1]
+
+				if roundInfo.KillARound[key].Killer == nextValue.Victim && ((nextValue.TimeOfKill - roundInfo.KillARound[key].TimeOfKill) < (6 * time.Second)) {
+					TradeKillerId := nextValue.KillerId
+					playerStat, exists := p.Match.Players[int64(TradeKillerId)]
+
+					if !exists {
+						return
+					}
+					playerStat.TradeKills++
+					p.Match.Players[int64(TradeKillerId)] = playerStat
+				}
+			}
 		}
 	}
 }

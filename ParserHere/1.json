@@ -137,10 +137,10 @@
           "VLDNN"
         ],
         "SurvivorsB": [
-          "xJDC",
           "Wahtzz",
           "Jy0",
-          "birdfromsky"
+          "birdfromsky",
+          "xJDC"
         ],
         "BombPlanted": true,
         "SideWon": "Terrorists",
@@ -405,8 +405,8 @@
         "ScoreB": 3,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "FASHR",
-          "syrsoN1"
+          "syrsoN1",
+          "FASHR"
         ],
         "SurvivorsB": [
           "birdfromsky",
@@ -531,8 +531,8 @@
           "syrsoN1"
         ],
         "SurvivorsB": [
-          "birdfromsky",
-          "Wahtzz"
+          "Wahtzz",
+          "birdfromsky"
         ],
         "BombPlanted": false,
         "SideWon": "Counter Terrorists",
@@ -754,8 +754,8 @@
         "FirstKillCount": 1,
         "SurvivorsA": [
           "VLDNN",
-          "FASHR",
-          "syrsoN1"
+          "syrsoN1",
+          "FASHR"
         ],
         "SurvivorsB": [
           "xJDC"
@@ -874,9 +874,9 @@
         "ScoreB": 3,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "FASHR",
           "VLDNN",
-          "syrsoN1"
+          "syrsoN1",
+          "FASHR"
         ],
         "SurvivorsB": [
           "xJDC"
@@ -995,8 +995,8 @@
         "ScoreB": 3,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "syrsoN1",
-          "VLDNN"
+          "VLDNN",
+          "syrsoN1"
         ],
         "SurvivorsB": null,
         "BombPlanted": true,
@@ -1265,8 +1265,8 @@
         "ScoreB": 4,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "VLDNN",
-          "syrsoN1"
+          "syrsoN1",
+          "VLDNN"
         ],
         "SurvivorsB": [
           "xJDC"
@@ -1808,9 +1808,9 @@
         "FirstKillCount": 1,
         "SurvivorsA": null,
         "SurvivorsB": [
-          "VLDNN",
+          "xJDC",
           "FASHR",
-          "xJDC"
+          "VLDNN"
         ],
         "BombPlanted": true,
         "SideWon": "Terrorists",
@@ -1946,10 +1946,10 @@
           "fejtZ"
         ],
         "SurvivorsB": [
-          "birdfromsky",
+          "xJDC",
           "syrsoN1",
-          "FASHR",
-          "xJDC"
+          "birdfromsky",
+          "FASHR"
         ],
         "BombPlanted": true,
         "SideWon": "Terrorists",
@@ -2034,10 +2034,10 @@
         "FirstKillCount": 1,
         "SurvivorsA": null,
         "SurvivorsB": [
-          "VLDNN",
-          "syrsoN1",
           "birdfromsky",
-          "xJDC"
+          "xJDC",
+          "syrsoN1",
+          "VLDNN"
         ],
         "BombPlanted": true,
         "SideWon": "Terrorists",
@@ -2153,10 +2153,10 @@
         "ScoreB": 10,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "Jy0",
-          "xezr",
           "eku1337",
-          "Wahtzz"
+          "Wahtzz",
+          "Jy0",
+          "xezr"
         ],
         "SurvivorsB": null,
         "BombPlanted": true,
@@ -2273,9 +2273,9 @@
         "ScoreB": 10,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "xezr",
           "fejtZ",
-          "Jy0"
+          "Jy0",
+          "xezr"
         ],
         "SurvivorsB": null,
         "BombPlanted": true,
@@ -2408,10 +2408,10 @@
         "ScoreB": 10,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "Wahtzz",
-          "eku1337",
           "xezr",
-          "Jy0"
+          "Jy0",
+          "Wahtzz",
+          "eku1337"
         ],
         "SurvivorsB": null,
         "BombPlanted": false,
@@ -2962,8 +2962,8 @@
         "ScoreB": 10,
         "FirstKillCount": 1,
         "SurvivorsA": [
-          "Jy0",
-          "xezr"
+          "xezr",
+          "Jy0"
         ],
         "SurvivorsB": [
           "VLDNN"
@@ -3108,8 +3108,10 @@
         "Round4k": 0,
         "Round5k": 1,
         "Totaldmg": 2041,
-        "TradeKills": 0,
+        "TradeKills": 1,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 11,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3150,8 +3152,10 @@
         "Round4k": 0,
         "Round5k": 0,
         "Totaldmg": 1641,
-        "TradeKills": 0,
+        "TradeKills": 4,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 31,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3192,8 +3196,10 @@
         "Round4k": 0,
         "Round5k": 0,
         "Totaldmg": 931,
-        "TradeKills": 0,
+        "TradeKills": 2,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 9,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3232,8 +3238,10 @@
         "Round4k": 0,
         "Round5k": 0,
         "Totaldmg": 1837,
-        "TradeKills": 0,
+        "TradeKills": 2,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 8,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3274,8 +3282,10 @@
         "Round4k": 1,
         "Round5k": 0,
         "Totaldmg": 1894,
-        "TradeKills": 0,
+        "TradeKills": 3,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 8,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3317,8 +3327,10 @@
         "Round4k": 0,
         "Round5k": 0,
         "Totaldmg": 1270,
-        "TradeKills": 0,
+        "TradeKills": 4,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 11,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3358,8 +3370,10 @@
         "Round4k": 0,
         "Round5k": 0,
         "Totaldmg": 1666,
-        "TradeKills": 0,
+        "TradeKills": 4,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 2,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3401,8 +3415,10 @@
         "Round4k": 0,
         "Round5k": 0,
         "Totaldmg": 1945,
-        "TradeKills": 0,
+        "TradeKills": 2,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 13,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3444,8 +3460,10 @@
         "Round4k": 0,
         "Round5k": 0,
         "Totaldmg": 627,
-        "TradeKills": 0,
+        "TradeKills": 2,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 2,
         "AvgflshDuration": 0,
         "WeaponKill": {
@@ -3483,8 +3501,10 @@
         "Round4k": 0,
         "Round5k": 0,
         "Totaldmg": 1931,
-        "TradeKills": 0,
+        "TradeKills": 3,
         "TradeDeath": 0,
+        "CTKills": 0,
+        "TKills": 0,
         "EffectiveFlashes": 0,
         "AvgflshDuration": 0,
         "WeaponKill": {
