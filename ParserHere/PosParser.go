@@ -16,4 +16,5 @@ func (p *DemoParser) GetPlayerPos(e events.FrameDone) {
 			p.Match.Rounds[p.state.round-1].Positions = append(p.Match.Rounds[p.state.round-1].Positions, PlayerWhere)
 		}
 	}
+
 }

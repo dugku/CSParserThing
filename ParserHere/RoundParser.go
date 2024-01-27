@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
@@ -22,6 +21,16 @@ func (p *DemoParser) stateControler(e events.RoundStart) {
 	round := RoundInformation{}
 
 	p.Match.Rounds = append(p.Match.Rounds, round)
+
+	/*
+		gs := p.parser.GameState()
+
+		for _, player := range gs.Participants().All() {
+			if player.TeamState != nil {
+				fmt.Printf("bindNewPlayerControllerS2 %s\tTeamState.Team %d Team %d\n", player.Name, player.TeamState.Team(), player.Team)
+			}
+		}
+	*/
 }
 
 func (p *DemoParser) MatchStartHandler(e events.MatchStart) {
@@ -38,9 +47,9 @@ func (p *DemoParser) MatchStartHandler(e events.MatchStart) {
 	p.Match.WhoVsWho = CountTeam + " vs " + TerrTeam
 
 	p.Match.Map = p.parser.Header().MapName
-	fmt.Println(p.parser.Header().MapName)
 
 	roundTime.roundStartTime = p.parser.CurrentTime()
+
 	//these two lines broke the code so just commenting them out just in case i need it again
 	//or not
 	/*
@@ -168,12 +177,34 @@ func (p *DemoParser) PlayerAlive(e events.RoundEnd) {
 					playerStat, exists := p.Match.Players[int64(TradeKillerId)]
 
 					if !exists {
-						return
+						continue
 					}
 					playerStat.TradeKills++
 					p.Match.Players[int64(TradeKillerId)] = playerStat
 				}
 			}
+		}
+
+		for key, _ := range roundInfo.KillARound {
+			KillerId := roundInfo.KillARound[key].KillerId
+			playerStat, exists := p.Match.Players[int64(KillerId)]
+
+			if !exists {
+				continue
+			}
+
+			if roundInfo.KillARound[key].Killer == roundInfo.KillARound[key].Victim {
+				continue
+			}
+			if roundInfo.KillARound[key].KillerTeam == common.TeamCounterTerrorists {
+				playerStat.CTkills++
+			}
+
+			if roundInfo.KillARound[key].KillerTeam == common.TeamTerrorists {
+				playerStat.Tkills++
+			}
+
+			p.Match.Players[int64(KillerId)] = playerStat
 		}
 	}
 }

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"math"
 
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
@@ -72,11 +71,12 @@ func (p *DemoParser) ThePlayer(player *common.Player) playerStat {
 		Totaldmg:        0,
 		TradeKills:      0,
 		TradeDeath:      0,
-		CTKills:         0,
-		TKills:          0,
+		CTkills:         0,
+		Tkills:          0,
 		AvgflshDuration: 0,
 		WeaponKill:      p.allweapons(),
 		NadeThrowen:     make(map[int]int),
+		ClanName:        player.TeamState.ClanName(),
 	}
 }
 
@@ -127,18 +127,6 @@ func (p *DemoParser) statSetter(c []*common.Player) {
 		playerName := c[i].Name
 
 		multiKillCheck := c[i].Kills() - playerMap[playerName]
-
-		//team check this is going to be aids bro.
-		playerTeam := c[i].Team
-
-		if playerTeam == common.TeamCounterTerrorists {
-
-			playerStat.CTKills += c[i].Kills() - playerMap[playerName]
-		}
-		if playerTeam == common.TeamTerrorists {
-
-			playerStat.TKills += c[i].Kills() - playerMap[playerName]
-		}
 
 		switch {
 		case multiKillCheck == 2:
@@ -216,7 +204,6 @@ func (p *DemoParser) KillHandler(e events.Kill) {
 		return
 	}
 
-	//fmt.Println(kill)
 	if p.state.round > 0 && p.state.round <= len(p.Match.Rounds) {
 		if p.Match.Rounds[p.state.round-1].KillARound == nil {
 			p.Match.Rounds[p.state.round-1].KillARound = make(map[int]RoundKill)
@@ -238,8 +225,8 @@ func (p *DemoParser) KillHandler(e events.Kill) {
 				VictFlashDur:     e.Victim.GetFlashDuration(),
 				//yikes
 				//Dist:         math.Round(DistForm(e.Killer.Position(), e.Victim.Position())*100) / 100,
-				KillerTeam: e.Killer.Team,
-				VictTeam:   e.Victim.Team,
+				KillerTeam: e.Killer.TeamState.Team(),
+				VictTeam:   e.Victim.TeamState.Team(),
 			}
 			count++
 		}
@@ -252,7 +239,6 @@ func (p *DemoParser) KillHandler(e events.Kill) {
 		p.updateWeaponKills(e.Killer, e.Weapon.Type)
 
 	}
-
 }
 
 func (p *DemoParser) AddHeadshot(c *common.Player) {
@@ -272,11 +258,10 @@ func (p *DemoParser) AddHeadshot(c *common.Player) {
 
 func (p *DemoParser) updateWeaponKills(c *common.Player, weaponType common.EquipmentType) {
 	playerId := c.SteamID64
-	fmt.Println("Here Above")
+
 	playerStat, exists := p.Match.Players[int64(playerId)]
 
 	if !exists {
-		fmt.Println("Here !ex")
 		return
 	}
 
@@ -308,10 +293,6 @@ func (p *DemoParser) addFirst(c *common.Player, c2 *common.Player) {
 
 	playerStatVict.FirstDeath++
 	p.Match.Players[int64(playerIdVict)] = playerStatVict
-}
-
-func (p *DemoParser) addTrade(c *common.Player, c2 *common.Player) {
-
 }
 
 /*

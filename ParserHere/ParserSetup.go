@@ -105,8 +105,8 @@ type playerStat struct {
 	Totaldmg         int
 	TradeKills       int
 	TradeDeath       int
-	CTKills          int
-	TKills           int
+	CTkills          int
+	Tkills           int
 	EffectiveFlashes int
 	AvgflshDuration  float64
 	WeaponKill       map[int]int
@@ -114,6 +114,7 @@ type playerStat struct {
 	TotalDist        float64
 	FlashesThrown    int
 	NadeThrowen      map[int]int
+	ClanName         string
 }
 
 type playerPositions struct {
