@@ -128,6 +128,18 @@ func (p *DemoParser) statSetter(c []*common.Player) {
 
 		multiKillCheck := c[i].Kills() - playerMap[playerName]
 
+		//team check this is going to be aids bro.
+		playerTeam := c[i].Team
+
+		if playerTeam == common.TeamCounterTerrorists {
+
+			playerStat.CTKills += c[i].Kills() - playerMap[playerName]
+		}
+		if playerTeam == common.TeamTerrorists {
+
+			playerStat.TKills += c[i].Kills() - playerMap[playerName]
+		}
+
 		switch {
 		case multiKillCheck == 2:
 			playerStat.Round2k++
@@ -192,10 +204,6 @@ func (p *DemoParser) KillHandler(e events.Kill) {
 		return
 	}
 
-	if p.parser.GameState().GamePhase() == common.GamePhasePregame {
-		fmt.Println("Here")
-	}
-
 	if e.IsHeadshot {
 		p.AddHeadshot(e.Killer)
 	}
@@ -230,8 +238,8 @@ func (p *DemoParser) KillHandler(e events.Kill) {
 				VictFlashDur:     e.Victim.GetFlashDuration(),
 				//yikes
 				//Dist:         math.Round(DistForm(e.Killer.Position(), e.Victim.Position())*100) / 100,
-				KillerWeapon: e.Killer.ActiveWeapon().Type,
-				KillerTeam:   e.Killer.Team,
+				KillerTeam: e.Killer.Team,
+				VictTeam:   e.Victim.Team,
 			}
 			count++
 		}
@@ -264,10 +272,11 @@ func (p *DemoParser) AddHeadshot(c *common.Player) {
 
 func (p *DemoParser) updateWeaponKills(c *common.Player, weaponType common.EquipmentType) {
 	playerId := c.SteamID64
-
+	fmt.Println("Here Above")
 	playerStat, exists := p.Match.Players[int64(playerId)]
 
 	if !exists {
+		fmt.Println("Here !ex")
 		return
 	}
 

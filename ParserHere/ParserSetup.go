@@ -36,10 +36,12 @@ type parsingState struct {
 }
 
 type MatchInfo struct {
-	Map      string
-	WhoVsWho string
-	Rounds   []RoundInformation
-	Players  map[int64]playerStat
+	Map          string
+	WhoVsWho     string
+	Rounds       []RoundInformation
+	Players      map[int64]playerStat
+	TeamAPlayers []*common.Player
+	TeamBPlayers []*common.Player
 }
 
 type RoundInformation struct {
@@ -79,6 +81,7 @@ type RoundKill struct {
 	Dist             float64
 	KillerWeapon     common.EquipmentType
 	KillerTeam       common.Team
+	VictTeam         common.Team
 }
 
 type playerStat struct {
@@ -145,7 +148,7 @@ func (p *DemoParser) startParsing(demoPath string) error {
 	p.parser.RegisterEventHandler(p.RoundEcon)
 	p.parser.RegisterEventHandler(p.ScoreUpdater)
 	p.parser.RegisterEventHandler(p.MatchStartHandler)
-	p.parser.RegisterEventHandler(p.TeamSwitch)
+	//p.parser.RegisterEventHandler(p.TeamSwitch)
 	p.parser.RegisterEventHandler(p.PlayerAlive)
 	p.parser.RegisterEventHandler(p.BombPlanted)
 	p.parser.RegisterEventHandler(p.playerGetter)
@@ -167,7 +170,7 @@ func (p *DemoParser) startParsing(demoPath string) error {
 }
 
 func main() {
-	demoDir := "C:\\Users\\Mic\\Desktop\\Demos"
+	demoDir := "C:\\Users\\iphon\\Desktop\\DEMOProject\\More_Demos"
 
 	demoPaths, err := getDemoPaths(demoDir)
 	if err != nil {

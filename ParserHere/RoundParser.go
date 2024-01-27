@@ -41,6 +41,13 @@ func (p *DemoParser) MatchStartHandler(e events.MatchStart) {
 	fmt.Println(p.parser.Header().MapName)
 
 	roundTime.roundStartTime = p.parser.CurrentTime()
+	//these two lines broke the code so just commenting them out just in case i need it again
+	//or not
+	/*
+		p.Match.TeamAPlayers = p.parser.GameState().TeamCounterTerrorists().Members()
+		p.Match.TeamBPlayers = p.parser.GameState().TeamTerrorists().Members()
+	*/
+
 }
 
 func (p *DemoParser) TeamSwitch(e events.TeamSideSwitch) {
