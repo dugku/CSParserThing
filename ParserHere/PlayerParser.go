@@ -78,7 +78,7 @@ func (p *DemoParser) ThePlayer(player *common.Player) playerStat {
 		AvgflshDuration: 0,
 		WeaponKill:      p.allweapons(),
 		ClanName:        player.TeamState.ClanName(),
-		totalUtilDmg:    0,
+		TotalUtilDmg:    0,
 	}
 }
 
@@ -110,6 +110,7 @@ func (p *DemoParser) playerGetter(e events.RoundEnd) {
 func (p *DemoParser) statSetter(c []*common.Player) {
 	//need to get dmg, hs percentage, ADR, kd Ratio, and multi kills, kills, assists, deaths
 	//have to get headshot percentage later because it's in the kill handler
+	gs := p.parser.GameState()
 	for i := range c {
 		steamId := c[i].SteamID64
 		playerStat, exists := p.Match.Players[int64(steamId)]
@@ -125,6 +126,11 @@ func (p *DemoParser) statSetter(c []*common.Player) {
 		playerStat.ADR = math.Round(p.calcADR(playerStat.Totaldmg)*100) / 100
 		playerStat.KDRatio = math.Round(p.calcKDRatio(playerStat.Kills, playerStat.Deaths)*100) / 100
 		playerStat.HeadPercent = math.Round(p.calcHSPercent(playerStat.Kills, playerStat.HS)*100) / 100
+		playerStat.TotalUtilDmg = c[i].UtilityDamage()
+		playerStat.AvgKillsRnd = math.Round(float64(playerStat.Kills)/float64(gs.TotalRoundsPlayed())*100) / 100
+		playerStat.AvgDeathsRnd = math.Round(float64(playerStat.Deaths)/float64(gs.TotalRoundsPlayed())*100) / 100
+		playerStat.AvgAssistsRnd = math.Round(float64(playerStat.Assits)/float64(gs.TotalRoundsPlayed())*100) / 100
+		playerStat.ImpactPerRnd = math.Round((2.13*playerStat.AvgKillsRnd+0.42*playerStat.AvgAssistsRnd-0.41)*100) / 100
 
 		playerName := c[i].Name
 
@@ -220,7 +226,7 @@ func (p *DemoParser) KillHandler(e events.Kill) {
 				KillerId:         e.Killer.SteamID64,
 				Victim:           e.Victim.Name,
 				Assistor:         assistorName,
-				killerTeamString: e.Killer.TeamState.ClanName(),
+				KillerTeamString: e.Killer.TeamState.ClanName(),
 				VictimTeamString: e.Victim.TeamState.ClanName(),
 				IsHeadshot:       e.IsHeadshot,
 				IsFlashed:        e.Victim.IsBlinded(),

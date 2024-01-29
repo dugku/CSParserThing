@@ -71,7 +71,7 @@ type RoundKill struct {
 	KillerId         uint64
 	Victim           string
 	Assistor         string
-	killerTeamString string
+	KillerTeamString string
 	VictimTeamString string
 	VictFlashDur     float32
 	VictDmgTaken     int
@@ -85,6 +85,7 @@ type RoundKill struct {
 }
 
 type playerStat struct {
+	ImpactPerRnd     float64
 	UserName         string
 	SteamID          uint64
 	Kills            int
@@ -114,7 +115,10 @@ type playerStat struct {
 	TotalDist        float64
 	FlashesThrown    int
 	ClanName         string
-	totalUtilDmg     int
+	TotalUtilDmg     int
+	AvgKillsRnd      float64
+	AvgDeathsRnd     float64
+	AvgAssistsRnd    float64
 }
 
 type playerPositions struct {
@@ -174,7 +178,7 @@ func (p *DemoParser) startParsing(demoPath string) error {
 }
 
 func main() {
-	demoDir := "C:\\Users\\iphon\\Desktop\\DEMOProject\\More_Demos"
+	demoDir := "C:\\Users\\Mic\\Desktop\\Demos"
 
 	demoPaths, err := getDemoPaths(demoDir)
 	if err != nil {

@@ -214,8 +214,8 @@ func (p *DemoParser) PlayerAlive(e events.RoundEnd) {
 
 			p.Match.Players[int64(KillerId)] = playerStat
 		}
-		players := p.parser.GameState().Participants().Playing()
-		p.getNadeDmg(players)
+		//players := p.parser.GameState().Participants().Playing()
+		//p.getNadeDmg(players)
 	}
 }
 
@@ -227,8 +227,8 @@ func (p *DemoParser) getNadeDmg(c []*common.Player) {
 		if !exists {
 			return
 		}
-
-		playerStat.totalUtilDmg = c[i].UtilityDamage()
+		fmt.Println(playerStat.TotalUtilDmg)
+		playerStat.TotalUtilDmg = c[i].UtilityDamage()
 
 		p.Match.Players[int64(playerId)] = playerStat
 	}
