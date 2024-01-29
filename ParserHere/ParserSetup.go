@@ -113,8 +113,8 @@ type playerStat struct {
 	AvgDist          float64
 	TotalDist        float64
 	FlashesThrown    int
-	NadeThrowen      map[int]int
 	ClanName         string
+	totalUtilDmg     int
 }
 
 type playerPositions struct {
@@ -136,7 +136,9 @@ func (p *DemoParser) startParsing(demoPath string) error {
 	f, err := os.Open(demoPath)
 	if err != nil {
 		log.Panic("failed to open demo file: ", err)
+		fmt.Println(err)
 		// Ensure p.wg.Done() is called even if there's an error
+
 	}
 	defer f.Close()
 
@@ -155,14 +157,15 @@ func (p *DemoParser) startParsing(demoPath string) error {
 	p.parser.RegisterEventHandler(p.playerGetter)
 	p.parser.RegisterEventHandler(p.KillHandler)
 	p.parser.RegisterEventHandler(p.GetPresRoundKill)
-	p.parser.RegisterEventHandler(p.GernadesThrown)
-	p.parser.RegisterEventHandler(p.Inferno)
-	p.parser.RegisterEventHandler(p.PlayerFlashed)
+	//p.parser.RegisterEventHandler(p.GernadesThrown)
+	//p.parser.RegisterEventHandler(p.Inferno)
+	//p.parser.RegisterEventHandler(p.PlayerFlashed)
 
 	err = p.parser.ParseToEnd()
 	if err != nil {
 		// Handle error, log, etc.
-		log.Fatal("Error Here", err)
+		//log.Fatal("Error Here", err)
+		return nil
 	}
 
 	// Wait for the goroutine to finish
@@ -186,7 +189,7 @@ func main() {
 
 		err := parser.startParsing(demoPath)
 		if err != nil {
-			log.Printf("Error parsing demo %s: %v\n", demoPath, err)
+			log.Printf("Error parsing demo %s: %v, Line 191\n", demoPath, err)
 			continue
 		}
 

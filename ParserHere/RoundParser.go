@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
@@ -33,22 +34,28 @@ func (p *DemoParser) stateControler(e events.RoundStart) {
 	*/
 }
 
-func (p *DemoParser) MatchStartHandler(e events.MatchStart) {
-	ActivePlayers := p.parser.GameState().Participants().Playing()
-	p.GetActivePlayer(ActivePlayers)
-	roundTime := &timeRound{}
+func (p *DemoParser) MatchStartHandler(e events.MatchStartedChanged) {
 
-	p.state.TeamA = common.TeamCounterTerrorists
-	p.state.TeamB = common.TeamTerrorists
+	if e.NewIsStarted {
+		fmt.Println("Match Start Fired Maybe")
+		ActivePlayers := p.parser.GameState().Participants().Playing()
+		fmt.Println(ActivePlayers)
+		p.GetActivePlayer(ActivePlayers)
 
-	CountTeam := p.parser.GameState().TeamCounterTerrorists().ClanName()
-	TerrTeam := p.parser.GameState().TeamTerrorists().ClanName()
+		roundTime := &timeRound{}
 
-	p.Match.WhoVsWho = CountTeam + " vs " + TerrTeam
+		p.state.TeamA = common.TeamCounterTerrorists
+		p.state.TeamB = common.TeamTerrorists
 
-	p.Match.Map = p.parser.Header().MapName
+		CountTeam := p.parser.GameState().TeamCounterTerrorists().ClanName()
+		TerrTeam := p.parser.GameState().TeamTerrorists().ClanName()
 
-	roundTime.roundStartTime = p.parser.CurrentTime()
+		p.Match.WhoVsWho = CountTeam + " vs " + TerrTeam
+
+		p.Match.Map = p.parser.Header().MapName
+
+		roundTime.roundStartTime = p.parser.CurrentTime()
+	}
 
 	//these two lines broke the code so just commenting them out just in case i need it again
 	//or not
@@ -167,6 +174,7 @@ func (p *DemoParser) PlayerAlive(e events.RoundEnd) {
 		roundInfo := &p.Match.Rounds[p.state.round-1]
 
 		//man I hope this logic is right
+		//gets trade kills I think it works
 		for key, _ := range roundInfo.KillARound {
 
 			if key+1 < len(roundInfo.KillARound) {
@@ -206,6 +214,23 @@ func (p *DemoParser) PlayerAlive(e events.RoundEnd) {
 
 			p.Match.Players[int64(KillerId)] = playerStat
 		}
+		players := p.parser.GameState().Participants().Playing()
+		p.getNadeDmg(players)
+	}
+}
+
+func (p *DemoParser) getNadeDmg(c []*common.Player) {
+	for i := range c {
+		playerId := c[i].SteamID64
+		playerStat, exists := p.Match.Players[int64(playerId)]
+
+		if !exists {
+			return
+		}
+
+		playerStat.totalUtilDmg = c[i].UtilityDamage()
+
+		p.Match.Players[int64(playerId)] = playerStat
 	}
 }
 

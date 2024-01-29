@@ -1,11 +1,13 @@
 package main
 
 import (
-	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
+	"fmt"
+
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events"
 )
 
 func (p *DemoParser) PlayerFlashed(e events.PlayerFlashed) {
+	fmt.Println(e)
 	playerId := e.Attacker.SteamID64
 
 	playerStat, exists := p.Match.Players[int64(playerId)]
@@ -21,6 +23,7 @@ func (p *DemoParser) PlayerFlashed(e events.PlayerFlashed) {
 
 }
 
+/*
 func (p *DemoParser) Inferno(e events.InfernoStart) {
 	Thrower := e.Inferno.Thrower().SteamID64
 
@@ -29,6 +32,8 @@ func (p *DemoParser) Inferno(e events.InfernoStart) {
 	if !exists {
 		return
 	}
+
+	fmt.Println(e.Inferno)
 
 	playerStat.NadeThrowen[503]++
 
@@ -42,6 +47,7 @@ func (p *DemoParser) GernadesThrown(e events.GrenadeEventIf) {
 		return
 	}
 
+	fmt.Println(GerBase)
 	playerId := GerBase.Thrower.SteamID64
 
 	playerStat, exists := p.Match.Players[int64(playerId)]
@@ -59,3 +65,4 @@ func (p *DemoParser) GernadesThrown(e events.GrenadeEventIf) {
 	p.Match.Players[int64(playerId)] = playerStat
 
 }
+*/

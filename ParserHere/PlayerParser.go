@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math"
 
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
@@ -22,6 +23,7 @@ func (p *DemoParser) GetActivePlayer(c []*common.Player) {
 		if _, exists := p.Match.Players[int64(steamId)]; exists {
 			return
 		} else {
+			fmt.Println(player)
 			p.Match.Players[int64(steamId)] = p.ThePlayer(player)
 		}
 	}
@@ -75,8 +77,8 @@ func (p *DemoParser) ThePlayer(player *common.Player) playerStat {
 		Tkills:          0,
 		AvgflshDuration: 0,
 		WeaponKill:      p.allweapons(),
-		NadeThrowen:     make(map[int]int),
 		ClanName:        player.TeamState.ClanName(),
+		totalUtilDmg:    0,
 	}
 }
 
