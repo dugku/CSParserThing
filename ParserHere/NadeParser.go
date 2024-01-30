@@ -1,13 +1,10 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events"
 )
 
 func (p *DemoParser) PlayerFlashed(e events.PlayerFlashed) {
-	fmt.Println(e)
 	playerId := e.Attacker.SteamID64
 
 	playerStat, exists := p.Match.Players[int64(playerId)]

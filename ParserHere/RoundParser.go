@@ -159,13 +159,36 @@ func (p *DemoParser) PlayerAlive(e events.RoundEnd) {
 		roundInfo := &p.Match.Rounds[p.state.round-1]
 		for _, v := range PlayersTeamA {
 			if v.IsAlive() {
+				playerId := v.SteamID64
 				roundInfo.SurvivorsA = append(roundInfo.SurvivorsA, v.String())
+
+				playerStat, exists := p.Match.Players[int64(playerId)]
+
+				if !exists {
+					return
+				}
+
+				playerStat.RoundSurvived++
+
+				p.Match.Players[int64(playerId)] = playerStat
+
 			}
 		}
 
 		for _, v := range PlayersTeamB {
 			if v.IsAlive() {
-				roundInfo.SurvivorsB = append(roundInfo.SurvivorsB, v.String())
+				playerId := v.SteamID64
+				roundInfo.SurvivorsA = append(roundInfo.SurvivorsA, v.String())
+
+				playerStat, exists := p.Match.Players[int64(playerId)]
+
+				if !exists {
+					return
+				}
+
+				playerStat.RoundSurvived++
+
+				p.Match.Players[int64(playerId)] = playerStat
 			}
 		}
 	}
@@ -176,19 +199,34 @@ func (p *DemoParser) PlayerAlive(e events.RoundEnd) {
 		//man I hope this logic is right
 		//gets trade kills I think it works
 		for key, _ := range roundInfo.KillARound {
-
 			if key+1 < len(roundInfo.KillARound) {
 				nextValue := roundInfo.KillARound[key+1]
 
-				if roundInfo.KillARound[key].Killer == nextValue.Victim && ((nextValue.TimeOfKill - roundInfo.KillARound[key].TimeOfKill) < (6 * time.Second)) {
+				if roundInfo.KillARound[key].Killer == nextValue.Victim && ((nextValue.TimeOfKill - roundInfo.KillARound[key].TimeOfKill) < (5 * time.Second)) {
 					TradeKillerId := nextValue.KillerId
+					TradeVictId := nextValue.VictId
+					//This is for putting trade kills for the killer
 					playerStat, exists := p.Match.Players[int64(TradeKillerId)]
 
 					if !exists {
 						continue
 					}
 					playerStat.TradeKills++
+
 					p.Match.Players[int64(TradeKillerId)] = playerStat
+
+					//This is getting the player that was traded for kinda confusing i kno
+					//but its for the KAST stat then we can try to get the Rating 2.0 statline
+
+					VictStat, exist := p.Match.Players[int64(TradeVictId)]
+
+					if !exist {
+						return
+					}
+
+					VictStat.RoundTraded++
+
+					p.Match.Players[int64(TradeVictId)] = VictStat
 				}
 			}
 		}
@@ -214,23 +252,7 @@ func (p *DemoParser) PlayerAlive(e events.RoundEnd) {
 
 			p.Match.Players[int64(KillerId)] = playerStat
 		}
-		//players := p.parser.GameState().Participants().Playing()
-		//p.getNadeDmg(players)
-	}
-}
 
-func (p *DemoParser) getNadeDmg(c []*common.Player) {
-	for i := range c {
-		playerId := c[i].SteamID64
-		playerStat, exists := p.Match.Players[int64(playerId)]
-
-		if !exists {
-			return
-		}
-		fmt.Println(playerStat.TotalUtilDmg)
-		playerStat.TotalUtilDmg = c[i].UtilityDamage()
-
-		p.Match.Players[int64(playerId)] = playerStat
 	}
 }
 

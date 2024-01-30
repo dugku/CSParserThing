@@ -69,6 +69,7 @@ type RoundKill struct {
 	TimeOfKill       time.Duration
 	Killer           string
 	KillerId         uint64
+	VictId           uint64
 	Victim           string
 	Assistor         string
 	KillerTeamString string
@@ -119,6 +120,8 @@ type playerStat struct {
 	AvgKillsRnd      float64
 	AvgDeathsRnd     float64
 	AvgAssistsRnd    float64
+	RoundSurvived    int
+	RoundTraded      int
 }
 
 type playerPositions struct {
@@ -163,7 +166,7 @@ func (p *DemoParser) startParsing(demoPath string) error {
 	p.parser.RegisterEventHandler(p.GetPresRoundKill)
 	//p.parser.RegisterEventHandler(p.GernadesThrown)
 	//p.parser.RegisterEventHandler(p.Inferno)
-	//p.parser.RegisterEventHandler(p.PlayerFlashed)
+	p.parser.RegisterEventHandler(p.PlayerFlashed)
 
 	err = p.parser.ParseToEnd()
 	if err != nil {
@@ -178,7 +181,7 @@ func (p *DemoParser) startParsing(demoPath string) error {
 }
 
 func main() {
-	demoDir := "C:\\Users\\Mic\\Desktop\\Demos"
+	demoDir := "C:\\Users\\iphon\\Desktop\\DEMOProject\\More_Demos"
 
 	demoPaths, err := getDemoPaths(demoDir)
 	if err != nil {

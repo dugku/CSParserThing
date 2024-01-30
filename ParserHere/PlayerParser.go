@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"time"
 
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
 	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events"
@@ -131,6 +132,7 @@ func (p *DemoParser) statSetter(c []*common.Player) {
 		playerStat.AvgDeathsRnd = math.Round(float64(playerStat.Deaths)/float64(gs.TotalRoundsPlayed())*100) / 100
 		playerStat.AvgAssistsRnd = math.Round(float64(playerStat.Assits)/float64(gs.TotalRoundsPlayed())*100) / 100
 		playerStat.ImpactPerRnd = math.Round((2.13*playerStat.AvgKillsRnd+0.42*playerStat.AvgAssistsRnd-0.41)*100) / 100
+		playerStat.KAST = math.Round(((float64(playerStat.Kills)+float64(playerStat.Assits)+float64(playerStat.RoundSurvived)+float64(playerStat.RoundTraded))/float64(gs.TotalRoundsPlayed()))*100) / 100
 
 		playerName := c[i].Name
 
@@ -224,6 +226,7 @@ func (p *DemoParser) KillHandler(e events.Kill) {
 				TimeOfKill:       p.parser.CurrentTime(),
 				Killer:           e.Killer.Name,
 				KillerId:         e.Killer.SteamID64,
+				VictId:           e.Victim.SteamID64,
 				Victim:           e.Victim.Name,
 				Assistor:         assistorName,
 				KillerTeamString: e.Killer.TeamState.ClanName(),
@@ -245,8 +248,26 @@ func (p *DemoParser) KillHandler(e events.Kill) {
 		}
 
 		p.updateWeaponKills(e.Killer, e.Weapon.Type)
-
+		//p.IsFlashed(e.Victim)
 	}
+}
+
+func (p *DemoParser) IsFlashed(c *common.Player) {
+	playerId := c.SteamID64
+
+	playerStat, exists := p.Match.Players[int64(playerId)]
+
+	if !exists {
+		return
+	}
+
+	flashDurationInSeconds := time.Duration(c.FlashDuration) * time.Second
+
+	if flashDurationInSeconds >= 2*time.Second {
+		playerStat.EffectiveFlashes++
+		p.Match.Players[int64(playerId)] = playerStat
+	}
+
 }
 
 func (p *DemoParser) AddHeadshot(c *common.Player) {
