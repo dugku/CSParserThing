@@ -1,9 +1,6 @@
 package main
 
-import (
-	"github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events"
-)
-
+/*
 func (p *DemoParser) GetPlayerPos(e events.FrameDone) {
 	for _, gameStatePlayer := range p.parser.GameState().Participants().Playing() {
 		PlayerWhere := playerPositions{
@@ -18,3 +15,4 @@ func (p *DemoParser) GetPlayerPos(e events.FrameDone) {
 	}
 
 }
+*/

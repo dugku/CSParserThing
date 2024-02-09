@@ -1,9 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
 	"path/filepath"
 	"time"
@@ -36,12 +38,10 @@ type parsingState struct {
 }
 
 type MatchInfo struct {
-	Map          string
-	WhoVsWho     string
-	Rounds       []RoundInformation
-	Players      map[int64]playerStat
-	TeamAPlayers []*common.Player
-	TeamBPlayers []*common.Player
+	Map      string
+	WhoVsWho string
+	Rounds   []RoundInformation
+	Players  map[int64]playerStat
 }
 
 type RoundInformation struct {
@@ -57,12 +57,11 @@ type RoundInformation struct {
 	SurvivorsA       []string //need to get list of player names
 	SurvivorsB       []string //need to get list of player names
 	BombPlanted      bool
-	playerPlanted    string
-	roundEndedReason string
+	PlayerPlanted    string
+	RoundEndedReason string
 	SideWon          string //need to change later
 	KillARound       map[int]RoundKill
 	Duration         time.Duration
-	Positions        []playerPositions
 }
 
 type RoundKill struct {
@@ -80,9 +79,9 @@ type RoundKill struct {
 	IsHeadshot       bool
 	IsFlashed        bool
 	Dist             float64
-	KillerWeapon     common.EquipmentType
-	KillerTeam       common.Team
-	VictTeam         common.Team
+	KillerWeapon     int
+	KillerTeam       int
+	VictTeam         int
 }
 
 type playerStat struct {
@@ -91,7 +90,7 @@ type playerStat struct {
 	SteamID          uint64
 	Kills            int
 	Deaths           int
-	Assits           int
+	Assists          int
 	HS               int
 	HeadPercent      float64
 	ADR              float64
@@ -202,19 +201,31 @@ func main() {
 
 		outputFileName := fmt.Sprintf("%d.json", i+1)
 
-		jsonData, err := json.MarshalIndent(parser, "", "  ")
+		//jsonDataMatchRounds, err := json.MarshalIndent(parser, "", "  ")
+		jsonDataPlayers, err := json.MarshalIndent(parser, "", "  ")
 		if err != nil {
 			fmt.Println("Error:", err)
 			return
 		}
 
 		// Write JSON data to a file
-		err = os.WriteFile(outputFileName, jsonData, 0644)
+		err = os.WriteFile(outputFileName, jsonDataPlayers, 0644)
 		if err != nil {
 			fmt.Println("Error writing to file:", err)
 			return
 		}
 
+		requestBodyRounds := bytes.NewBuffer(jsonDataPlayers)
+		//PlayerRequestBody := bytes.NewBuffer(jsonDataPlayers)
+
+		resp, err := http.Post("http://127.0.0.1:5000/MatchData", "application/json", requestBodyRounds)
+
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		defer resp.Body.Close()
+		//defer respPlayers.Body.Close()
 	}
 
 }

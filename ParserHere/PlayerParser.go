@@ -30,27 +30,6 @@ func (p *DemoParser) GetActivePlayer(c []*common.Player) {
 	}
 }
 
-/*
-	func (p *DemoParser)(){
-		fmt.Println(e.Player)
-		if e.Player == nil {
-			fmt.Println(e.Player)
-			return
-		}
-
-		steamId := int64(e.Player.SteamID64)
-
-		if p.Match.Players == nil {
-			p.Match.Players = make(map[int64]playerStat)
-		}
-
-		if _, exists := p.Match.Players[steamId]; exists {
-			return
-		} else {
-			p.Match.Players[int64(e.Player.SteamID64)] = p.ThePlayer(e.Player)
-		}
-	}
-*/
 func (p *DemoParser) ThePlayer(player *common.Player) playerStat {
 
 	return playerStat{
@@ -58,7 +37,7 @@ func (p *DemoParser) ThePlayer(player *common.Player) playerStat {
 		SteamID:         player.SteamID64,
 		Kills:           0,
 		Deaths:          0,
-		Assits:          0,
+		Assists:         0,
 		HS:              0,
 		HeadPercent:     0,
 		ADR:             0,
@@ -122,7 +101,7 @@ func (p *DemoParser) statSetter(c []*common.Player) {
 
 		playerStat.Kills = c[i].Kills()
 		playerStat.Deaths = c[i].Deaths()
-		playerStat.Assits = c[i].Assists()
+		playerStat.Assists = c[i].Assists()
 		playerStat.Totaldmg = c[i].TotalDamage()
 		playerStat.ADR = math.Round(p.calcADR(playerStat.Totaldmg)*100) / 100
 		playerStat.KDRatio = math.Round(p.calcKDRatio(playerStat.Kills, playerStat.Deaths)*100) / 100
@@ -130,9 +109,9 @@ func (p *DemoParser) statSetter(c []*common.Player) {
 		playerStat.TotalUtilDmg = c[i].UtilityDamage()
 		playerStat.AvgKillsRnd = math.Round(float64(playerStat.Kills)/float64(gs.TotalRoundsPlayed())*100) / 100
 		playerStat.AvgDeathsRnd = math.Round(float64(playerStat.Deaths)/float64(gs.TotalRoundsPlayed())*100) / 100
-		playerStat.AvgAssistsRnd = math.Round(float64(playerStat.Assits)/float64(gs.TotalRoundsPlayed())*100) / 100
+		playerStat.AvgAssistsRnd = math.Round(float64(playerStat.Assists)/float64(gs.TotalRoundsPlayed())*100) / 100
 		playerStat.ImpactPerRnd = math.Round((2.13*playerStat.AvgKillsRnd+0.42*playerStat.AvgAssistsRnd-0.41)*100) / 100
-		playerStat.KAST = math.Round(((float64(playerStat.Kills)+float64(playerStat.Assits)+float64(playerStat.RoundSurvived)+float64(playerStat.RoundTraded))/float64(gs.TotalRoundsPlayed()))*100) / 100
+		//playerStat.KAST = math.Round(((float64(playerStat.Kills)+float64(playerStat.Assits)+float64(playerStat.RoundSurvived)+float64(playerStat.RoundTraded))/float64(gs.TotalRoundsPlayed()))*100) / 100
 
 		playerName := c[i].Name
 
@@ -236,8 +215,8 @@ func (p *DemoParser) KillHandler(e events.Kill) {
 				VictFlashDur:     e.Victim.GetFlashDuration(),
 				//yikes
 				//Dist:         math.Round(DistForm(e.Killer.Position(), e.Victim.Position())*100) / 100,
-				KillerTeam: e.Killer.TeamState.Team(),
-				VictTeam:   e.Victim.TeamState.Team(),
+				KillerTeam: int(e.Killer.TeamState.Team()),
+				VictTeam:   int(e.Victim.TeamState.Team()),
 			}
 			count++
 		}

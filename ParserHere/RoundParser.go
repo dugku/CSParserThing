@@ -15,6 +15,7 @@ type timeRound struct {
 }
 
 func (p *DemoParser) stateControler(e events.RoundStart) {
+
 	p.state.RoundOngoing = true
 
 	p.state.round++
@@ -148,7 +149,7 @@ func (p *DemoParser) PlayerAlive(e events.RoundEnd) {
 	if p.state.round > 0 && p.state.round <= len(p.Match.Rounds) {
 
 		roundInfo := &p.Match.Rounds[p.state.round-1]
-		roundInfo.roundEndedReason = ReasonsMap[int(Reason)]
+		roundInfo.RoundEndedReason = ReasonsMap[int(Reason)]
 		roundInfo.SideWon = WinnerMap[int(SideWon)]
 	}
 
@@ -242,11 +243,11 @@ func (p *DemoParser) PlayerAlive(e events.RoundEnd) {
 			if roundInfo.KillARound[key].Killer == roundInfo.KillARound[key].Victim {
 				continue
 			}
-			if roundInfo.KillARound[key].KillerTeam == common.TeamCounterTerrorists {
+			if roundInfo.KillARound[key].KillerTeam == 3 {
 				playerStat.CTkills++
 			}
 
-			if roundInfo.KillARound[key].KillerTeam == common.TeamTerrorists {
+			if roundInfo.KillARound[key].KillerTeam == 2 {
 				playerStat.Tkills++
 			}
 
@@ -263,6 +264,6 @@ func (p *DemoParser) BombPlanted(e events.BombPlanted) {
 
 		roundInfo.BombPlanted = true
 
-		roundInfo.playerPlanted = e.Player.Name
+		roundInfo.PlayerPlanted = e.Player.Name
 	}
 }
